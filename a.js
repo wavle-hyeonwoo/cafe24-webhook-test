@@ -11,7 +11,10 @@ const qs = require("querystring");
 // );
 
 console.log(
-  qs.stringify({
+  qs.encode({
+    code: "1234",
     grant_type: "authorization_code",
+    redirect_uri:
+      "https://cafe24-webhook-test.herokuapp.com/cafe24/accesstoken",
   })
 );
