@@ -6,7 +6,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.post("/webhook", (req, res, next) => {
-  console.log(req.body);
+  console.log("[HOOK]\n", req.body, "\n\n\n");
   res.json({ code: 0 });
 });
 
