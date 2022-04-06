@@ -18,8 +18,8 @@ app.get("/cafe24/authcode", (req, res, next) => {
   res.json({ code: 0 });
 });
 
-app.post("/cafe24/accesstoken", (req, res, next) => {
-  console.log("ACCESS_TOKEN: \n\n\n\n", req.body);
+app.get("/cafe24/accesstoken", (req, res, next) => {
+  console.log("ACCESS_TOKEN: \n\n\n\n", req.query);
   res.json({ code: 0 });
 });
 
