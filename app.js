@@ -14,7 +14,7 @@ app.post("/webhook", (req, res, next) => {
 
 app.get("/cafe24/authcode", (req, res, next) => {
   console.log("QUERY: ", req.query.code);
-  //   getAccessToken(req.query.code);
+  getAccessToken(req.query.code);
   res.json({ code: 0 });
 });
 
