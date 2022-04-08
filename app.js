@@ -14,7 +14,7 @@ app.get("/", async (req, res, next) => {
   const query = `?order_status=N00`;
   const config = {
     headers: {
-      Authorization: "Bearer gWwMy4ngFhShzIjfEsQUEE",
+      Authorization: "Bearer spkNUa3VPZti2QpdX9r1VD",
       "Content-Type": "application/json",
       "X-Cafe24-Api-Version": "2022-03-01",
     },
