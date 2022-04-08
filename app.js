@@ -12,23 +12,35 @@ app.get("/", (req, res, next) => {
   const baseUrl = "https://clubpetworld.cafe24api.com/api/v2/admin/orders";
   const query = `?`;
   const config = {
-    hedaers: {
+    headers: {
       Authorization: "Bearer gWwMy4ngFhShzIjfEsQUEE",
       "Content-Type": "application/json",
-      "X-Cafe24-Api-Version": "2022-03-01",
+      "X-Cafe24-Api-Version": "2022-03-01"
     },
   };
-  axios
+  try {
+  
+  const response = await axios
     .get(baseUrl + query, config)
-    .then((res) => {
-      res.json(res.data);
+    res.json(response.data)
+  } catch(e) {
+    console.error('ERROR Occured. It seems that a access token has expired.')
+    const refreshResult = await axios.post(`https://clubpetworld.cafe24api.com/api/v2/oauth/token`, qs.stringify({grant_type: 'refresh_token', refresh_token: ''}), {
+      headers: {
+        Authorization: `Basic ${Buffer.from(
+          process.env.CAFE24_CLIENT_ID + ":" + process.env.CAFE24_CLIENT_SECRET
+        ).toString("base64")}`,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
     })
-    .catch((e) => {
-      res.json({
-        result: "ERROR",
-        error: e,
-      });
-    });
+
+    config.headers['Authorization'] = `Bearer ${refreshResult.data.access_token}`
+
+    const response = await axios
+    .get(baseUrl + query, config)
+    console.log('#1')
+    res.json(response.data)
+  }
 });
 
 app.post("/webhook", (req, res, next) => {
