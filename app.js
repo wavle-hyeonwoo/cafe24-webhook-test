@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.get("/", async (req, res, next) => {
   const baseUrl = "https://clubpetworld.cafe24api.com/api/v2/admin/orders";
-  const query = `?`;
+  const query = `?order_status=N00`;
   const config = {
     headers: {
       Authorization: "Bearer gWwMy4ngFhShzIjfEsQUEE",
