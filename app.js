@@ -1,3 +1,4 @@
+const { default: axios } = require("axios");
 const express = require("express");
 const app = express();
 //
@@ -6,6 +7,29 @@ const getAccessToken = require("./lib/get-token");
 app.set("port", process.env.PORT || 3000);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.get("/", (req, res, next) => {
+  const baseUrl = "https://clubpetworld.cafe24api.com/api/v2/admin/orders";
+  const query = `?`;
+  const config = {
+    hedaers: {
+      Authorization: "Bearer gWwMy4ngFhShzIjfEsQUEE",
+      "Content-Type": "application/json",
+      "X-Cafe24-Api-Version": "2022-03-01",
+    },
+  };
+  axios
+    .get(baseUrl + query, config)
+    .then((res) => {
+      res.json(res.data);
+    })
+    .catch((e) => {
+      res.json({
+        result: "ERROR",
+        error: e,
+      });
+    });
+});
 
 app.post("/webhook", (req, res, next) => {
   console.log("[HOOK]\n", req.body, "\n\n\n");
