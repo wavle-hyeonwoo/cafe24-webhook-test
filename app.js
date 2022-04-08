@@ -1,6 +1,7 @@
 const { default: axios } = require("axios");
 const express = require("express");
 const app = express();
+const qs = require("querystring");
 //
 const getAccessToken = require("./lib/get-token");
 
@@ -25,7 +26,10 @@ app.get("/", async (req, res, next) => {
     console.error("ERROR Occured. It seems that a access token has expired.");
     const refreshResult = await axios.post(
       `https://clubpetworld.cafe24api.com/api/v2/oauth/token`,
-      qs.stringify({ grant_type: "refresh_token", refresh_token: "" }),
+      qs.stringify({
+        grant_type: "refresh_token",
+        refresh_token: "XqmIe08ICSWVFxTzjIIZfP",
+      }),
       {
         headers: {
           Authorization: `Basic ${Buffer.from(
